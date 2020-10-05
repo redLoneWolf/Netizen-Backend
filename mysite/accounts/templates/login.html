@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign In</title>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="266064661203-rhv67sjobavgeuhq9jvqjuiiqdensho7.apps.googleusercontent.com">
+</head>
+    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+    <br/>
+    <input type="button" onclick="signOut();" value="Sign out"/>
+      <form id="myForm"  method="post">
+    username: <input type="text" name="fname">
+      pass 1: <input type="text" name="pass1">
+        pass 2: <input type="text" name="pass2">
+
+    <input type="submit" value="Submit">
+    </form>
+</body>
+<script>
+    var id_token;
+    function onSignIn(googleUser) {
+        console.log("Sign in successful! Yay!");
+        id_token = googleUser.getAuthResponse().id_token;
+ 
+    }
+    function signOut() {
+        var auth2 = gapi.auth2.getAuthInstance();
+        auth2.signOut().then(function () {
+          console.log('User signed out.');
+        });
+    }
+
+
+    var form = document.getElementById('myForm');
+
+// Adds a listener for the "submit" event.
+form.addEventListener('submit', function(e) {
+
+  e.preventDefault();
+  var x = form["fname"].value;
+  var pass1 = form["pass1"].value;
+  var pass2  = form["pass2"].value;
+
+       let xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://localhost:8000/accounts/google/');
+      // xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken')); 
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onload = function () {
+            console.log('Signed in as: ' + xhr.responseText);
+        };
+        let send_params = 'provider=google-oauth2&code=' + id_token + '&username='+ x +'&password='+ pass1 + '&password2='+pass2;
+        console.log("Sending: "+send_params);
+        xhr.send(send_params);
+
+});
+</script>
+</html>

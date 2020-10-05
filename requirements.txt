@@ -1,0 +1,9 @@
+channels==2.4.0
+djangorestframework_simplejwt==4.4.0
+Django==3.0.8
+djangorestframework==3.12.1
+Pillow==7.2.0
+protobuf==3.13.0
+PyJWT==1.7.1
+django-widget-tweaks==1.4.8
+google-auth==1.22.0
