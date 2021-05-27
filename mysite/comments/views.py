@@ -98,7 +98,7 @@ class CommentCreateView(APIView):
             
             serializer.save(user=user,content_type = content_type,object_id = post.id)
          
-            mention('ContentType.objects.get_for_model(Comment).model',serializer.data['id'],user,serializer.data['body'])
+            mention(ContentType.objects.get_for_model(Comment).model,serializer.data['id'],user,serializer.data['body'])
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
