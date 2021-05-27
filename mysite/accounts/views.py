@@ -34,8 +34,8 @@ INTERNAL_RESET_SESSION_TOKEN = '_password_reset_token'
 from rest_framework.pagination import PageNumberPagination
 from django.conf import settings
 
-from google.auth.transport import requests as google_transport_requests
-from google.oauth2 import id_token
+# from google.auth.transport import requests as google_transport_requests
+# from google.oauth2 import id_token
 
 from rest_framework_simplejwt.tokens import RefreshToken
 
@@ -125,8 +125,11 @@ class UserListView(generics.ListAPIView):
 class UserDetailView(APIView):
 	permission_classes = [IsAuthenticated]
 	
-	def get(self, request,username, format=None):
+	def get(self, request, format=None):
 		qs = User.objects.all()
+		
+		username = self.request.query_params.get('username')
+
 		user = get_object_or_404(qs, username=username)
 		serializer = UserSerializer(user,context={'request': request })
 		return Response(serializer.data)
@@ -293,59 +296,59 @@ class GoogleLoginDoneView(TemplateView):
     template_name = 'login.html'
     title = _('Password reset sent')
 
-class GoogleRegisterView(APIView):
-	permission_classes = [AllowAny]
-	def post(self, request, *args, **kwargs):
-		client_id = settings.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
-		idinfo = id_token.verify_oauth2_token(request.data['code'], google_transport_requests.Request(), client_id)
-		# print(idinfo)
+# class GoogleRegisterView(APIView):
+# 	permission_classes = [AllowAny]
+# 	def post(self, request, *args, **kwargs):
+# 		client_id = settings.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
+# 		idinfo = id_token.verify_oauth2_token(request.data['code'], google_transport_requests.Request(), client_id)
+# 		# print(idinfo)
 
-		if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-			raise ValueError('Wrong issuer.')
+# 		if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+# 			raise ValueError('Wrong issuer.')
 		
-		data={}
-		data['username'] = request.data['username']
-		data['email'] = idinfo['email']
-		data['email2'] = idinfo['email']
-		data['password'] = request.data['password']
-		data['password2'] = request.data['password2']
+# 		data={}
+# 		data['username'] = request.data['username']
+# 		data['email'] = idinfo['email']
+# 		data['email2'] = idinfo['email']
+# 		data['password'] = request.data['password']
+# 		data['password2'] = request.data['password2']
 		
-		serializer = RegistrationSerializer(data=data)
+# 		serializer = RegistrationSerializer(data=data)
 		
-		if serializer.is_valid():
-			user = serializer.save()
-			token = get_tokens_for_user(user)
-			response={}
-			response['response'] = 'successfully registered new user.'
-			response['id'] = user.id
-			response['username'] = user.username
+# 		if serializer.is_valid():
+# 			user = serializer.save()
+# 			token = get_tokens_for_user(user)
+# 			response={}
+# 			response['response'] = 'successfully registered new user.'
+# 			response['id'] = user.id
+# 			response['username'] = user.username
 			
-			response['token'] = token
-		else:
-			response = serializer.errors
-		return Response(response)
+# 			response['token'] = token
+# 		else:
+# 			response = serializer.errors
+# 		return Response(response)
 
 
 
-class GoogleLoginView(APIView):
-	permission_classes = [AllowAny]
-	def post(self, request, *args, **kwargs):
-		client_id = settings.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
-		idinfo = id_token.verify_oauth2_token(request.data['code'], google_transport_requests.Request(), client_id)
+# class GoogleLoginView(APIView):
+# 	permission_classes = [AllowAny]
+# 	def post(self, request, *args, **kwargs):
+# 		client_id = settings.SOCIAL_AUTH_GOOGLE_OAUTH2_KEY
+# 		idinfo = id_token.verify_oauth2_token(request.data['code'], google_transport_requests.Request(), client_id)
 
 
-		if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
-			raise ValueError('Wrong issuer.')
+# 		if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+# 			raise ValueError('Wrong issuer.')
 
-		try:
-			user = User.objects.get(email=idinfo['email'])
-			if not user:
-				return Response({'error': 'Auth failed'}, status=status.HTTP_401_UNAUTHORIZED)
-			token = get_tokens_for_user(user)
+# 		try:
+# 			user = User.objects.get(email=idinfo['email'])
+# 			if not user:
+# 				return Response({'error': 'Auth failed'}, status=status.HTTP_401_UNAUTHORIZED)
+# 			token = get_tokens_for_user(user)
 
-			return Response(token, status=status.HTTP_200_OK)
-		except Exception as ex:
-			return Response({'error': str(ex)}, status=status.HTTP_401_UNAUTHORIZED)
+# 			return Response(token, status=status.HTTP_200_OK)
+# 		except Exception as ex:
+# 			return Response({'error': str(ex)}, status=status.HTTP_401_UNAUTHORIZED)
 
 
 

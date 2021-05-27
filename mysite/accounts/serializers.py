@@ -6,7 +6,7 @@ from netizen.models import Template,Meme
 
 from django.contrib.auth import password_validation
 from django.core.exceptions import ValidationError
-from netizen.serializers import UserMemeSerializer,UserTemplateSerializer
+# from netizen.serializers import UserMemeSerializer,UserTemplateSerializer
 
 from relationships.serializers import FollowingSerializer,FollowersSerializer
 

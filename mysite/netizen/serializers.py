@@ -148,18 +148,18 @@ class MemeListSerializer(serializers.ModelSerializer):
     def get_comments(self,obj):
         return CommentSerializer(Comment.objects.filter(object_id=obj.id,content_type_id=obj.get_content_type_id,parent_id=None)[:3],many=True).data   
 
-class UserMemeSerializer(serializers.ModelSerializer):
+# class UserMemeSerializer(serializers.ModelSerializer):
    
-    class Meta:
-        model = Meme
-        fields =['id','images']
+#     class Meta:
+#         model = Meme
+#         fields =['id','images']
     
 
-class UserTemplateSerializer(serializers.ModelSerializer):
+# class UserTemplateSerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = Template
-        fields =['id','images']
+#     class Meta:
+#         model = Template
+#         fields =['id','images']
    
     
 

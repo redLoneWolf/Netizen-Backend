@@ -13,9 +13,9 @@ from .views import (
     PasswordResetView,
     PasswordResetConfirmView,
     PasswordResetDoneView,
-    GoogleRegisterView,
-    GoogleLoginDoneView,
-    GoogleLoginView,
+    # GoogleRegisterView,
+    # GoogleLoginDoneView,
+    # GoogleLoginView,
     MyProfileView,
 
 ) 
@@ -28,14 +28,14 @@ app_name = 'accounts'
 urlpatterns = [
     path('users/', UserListView.as_view(),name='users_list'),
 
-    path('users/<str:username>/', UserDetailView.as_view(),name='users_detail'),
+    path('user/', UserDetailView.as_view(),name='users_detail'),
     path('profile/', MyProfileView.as_view(),name='profile'),
 
   
 
-    path('login/', GoogleLoginDoneView.as_view(),name='google_login'),
-    path('google/',GoogleRegisterView.as_view(),name='google_register'),
-    path('google/login/',GoogleLoginView.as_view(),name='google_login2'),
+    # path('login/', GoogleLoginDoneView.as_view(),name='google_login'),
+    # path('google/',GoogleRegisterView.as_view(),name='google_register'),
+    # path('google/login/',GoogleLoginView.as_view(),name='google_login2'),
     path('register/', UserCreateAPIView.as_view(),name='register'),
     
     path('password/',PasswordChangeView.as_view(),name='change_password'),

@@ -24,8 +24,8 @@ from .serializers import( TemplateListSerializer,
                             TemplatePatchSerializer,
                             MemeDetailSerializer,
                             MemePatchSerializer,
-                            UserMemeSerializer,
-                            UserTemplateSerializer,
+                            # UserMemeSerializer,
+                            # UserTemplateSerializer,
                             ImageSerializer
 
                             )
@@ -33,10 +33,21 @@ from .serializers import( TemplateListSerializer,
 class TemplatesList(generics.ListAPIView):
    
 
-    queryset = Template.objects.all()
+    # queryset = Template.objects.all()
     serializer_class = TemplateListSerializer
     permission_classes = [IsAuthenticated]
-
+    
+    def get_queryset(self):
+            """
+            Optionally restricts the returned qs to a given user,
+            by filtering against a `username` query parameter in the URL.
+            """
+            queryset = Meme.objects.all()
+            username = self.request.query_params.get('username')
+            if username is not None:
+                queryset = queryset.filter(user__username=username)
+        
+            return queryset
 
 
 def upload_images(content_type,object_id,image):
@@ -123,34 +134,46 @@ class TemplateView(APIView):
 class MemesList(generics.ListAPIView):
   
 
-    queryset = Meme.objects.all()
+    # queryset = Meme.objects.all()
     serializer_class = MemeListSerializer
     permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        """
+        Optionally restricts the returned purchases to a given user,
+        by filtering against a `username` query parameter in the URL.
+        """
+        queryset = Meme.objects.all()
+        username = self.request.query_params.get('username')
+        if username is not None:
+            queryset = queryset.filter(user__username=username)
+    
+        return queryset
 
-class UserMemesList(generics.ListAPIView):
+
+# class UserMemesList(generics.ListAPIView):
    
-    serializer_class = UserMemeSerializer
-    permission_classes = [IsAuthenticated]
-    pagination_class = PageNumberPagination
+#     serializer_class = UserMemeSerializer
+#     permission_classes = [IsAuthenticated]
+#     pagination_class = PageNumberPagination
 
-    def get_queryset(self):
+#     def get_queryset(self):
 
-        username = self.kwargs['username']
-        user =  get_object_or_404(User, username=username)
-        return Meme.objects.filter(user=user)
+#         username = self.kwargs['username']
+#         user =  get_object_or_404(User, username=username)
+#         return Meme.objects.filter(user=user)
 
-class UserTemplatesList(generics.ListAPIView):
+# class UserTemplatesList(generics.ListAPIView):
 
-    serializer_class = UserTemplateSerializer
-    permission_classes = [IsAuthenticated]
-    pagination_class = PageNumberPagination
+#     serializer_class = UserTemplateSerializer
+#     permission_classes = [IsAuthenticated]
+#     pagination_class = PageNumberPagination
 
-    def get_queryset(self):
+#     def get_queryset(self):
 
-        username = self.kwargs['username']
-        user =  get_object_or_404(User, username=username)
-        return Template.objects.filter(user=user)
+#         username = self.kwargs['username']
+#         user =  get_object_or_404(User, username=username)
+#         return Template.objects.filter(user=user)
 
 
 

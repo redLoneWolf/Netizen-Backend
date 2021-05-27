@@ -1,0 +1,811 @@
+{
+    "extension": "linecount",
+    "version": "0.1.7",
+    "workspace": "g:\\Netizen-Backend",
+    "linecount": [
+        {
+            "version": "0.1.7",
+            "counttime": "2020-10-06 11:03:37",
+            "filesum": 132,
+            "codesum": 3951,
+            "commentsum": 231,
+            "blanksum": 1491,
+            "filelist": [
+                {
+                    "blank": 4,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "LICENSE"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "mysite\\accounts\\__init__.py"
+                },
+                {
+                    "blank": 9,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "mysite\\accounts\\admin.py"
+                },
+                {
+                    "blank": 2,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "mysite\\accounts\\apps.py"
+                },
+                {
+                    "blank": 6,
+                    "code": 40,
+                    "comment": 0,
+                    "filename": "mysite\\accounts\\forms.py"
+                },
+                {
+                    "blank": 7,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "mysite\\accounts\\managers.py"
+                },
+                {
+                    "blank": 6,
+                    "code": 37,
+                    "comment": 1,
+                    "filename": "mysite\\accounts\\migrations\\0001_initial.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 22,
+                    "comment": 1,
+                    "filename": "mysite\\accounts\\migrations\\0002_userfollowing.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 17,
+                    "comment": 1,
+                    "filename": "mysite\\accounts\\migrations\\0003_auto_20200722_1424.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 33,
+                    "comment": 1,
+                    "filename": "mysite\\accounts\\migrations\\0004_auto_20200722_1436.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 23,
+                    "comment": 1,
+                    "filename": "mysite\\accounts\\migrations\\0005_auto_20200722_1448.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 23,
+                    "comment": 1,
+                    "filename": "mysite\\accounts\\migrations\\0006_auto_20200722_1453.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 12,
+                    "comment": 1,
+                    "filename": "mysite\\accounts\\migrations\\0007_auto_20200815_1412.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 11,
+                    "comment": 1,
+                    "filename": "mysite\\accounts\\migrations\\0008_auto_20200820_1647.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 10,
+                    "comment": 1,
+                    "filename": "mysite\\accounts\\migrations\\0009_delete_userfollowing.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "mysite\\accounts\\migrations\\__init__.py"
+                },
+                {
+                    "blank": 38,
+                    "code": 108,
+                    "comment": 11,
+                    "filename": "mysite\\accounts\\models.py"
+                },
+                {
+                    "blank": 29,
+                    "code": 78,
+                    "comment": 9,
+                    "filename": "mysite\\accounts\\serializers.py"
+                },
+                {
+                    "blank": 13,
+                    "code": 19,
+                    "comment": 1,
+                    "filename": "mysite\\accounts\\templates\\base.html"
+                },
+                {
+                    "blank": 5,
+                    "code": 12,
+                    "comment": 0,
+                    "filename": "mysite\\accounts\\templates\\base_accounts.html"
+                },
+                {
+                    "blank": 12,
+                    "code": 26,
+                    "comment": 1,
+                    "filename": "mysite\\accounts\\templates\\includes\\form.html"
+                },
+                {
+                    "blank": 8,
+                    "code": 50,
+                    "comment": 0,
+                    "filename": "mysite\\accounts\\templates\\login.html"
+                },
+                {
+                    "blank": 2,
+                    "code": 17,
+                    "comment": 0,
+                    "filename": "mysite\\accounts\\templates\\password_reset_complete.html"
+                },
+                {
+                    "blank": 2,
+                    "code": 32,
+                    "comment": 0,
+                    "filename": "mysite\\accounts\\templates\\password_reset_confirm.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 2,
+                    "comment": 0,
+                    "filename": "mysite\\accounts\\templates\\password_reset_email.html"
+                },
+                {
+                    "blank": 3,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "mysite\\accounts\\templates\\password_reset_email_template.html"
+                },
+                {
+                    "blank": 0,
+                    "code": 1,
+                    "comment": 0,
+                    "filename": "mysite\\accounts\\templates\\password_reset_subject.txt"
+                },
+                {
+                    "blank": 93,
+                    "code": 183,
+                    "comment": 9,
+                    "filename": "mysite\\accounts\\tests.py"
+                },
+                {
+                    "blank": 2,
+                    "code": 7,
+                    "comment": 1,
+                    "filename": "mysite\\accounts\\tokens.py"
+                },
+                {
+                    "blank": 15,
+                    "code": 34,
+                    "comment": 1,
+                    "filename": "mysite\\accounts\\urls.py"
+                },
+                {
+                    "blank": 90,
+                    "code": 257,
+                    "comment": 14,
+                    "filename": "mysite\\accounts\\views.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "mysite\\activities\\__init__.py"
+                },
+                {
+                    "blank": 1,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "mysite\\activities\\admin.py"
+                },
+                {
+                    "blank": 2,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "mysite\\activities\\apps.py"
+                },
+                {
+                    "blank": 24,
+                    "code": 72,
+                    "comment": 2,
+                    "filename": "mysite\\activities\\helpers.py"
+                },
+                {
+                    "blank": 6,
+                    "code": 22,
+                    "comment": 1,
+                    "filename": "mysite\\activities\\migrations\\0001_initial.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 27,
+                    "comment": 1,
+                    "filename": "mysite\\activities\\migrations\\0002_mention.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "mysite\\activities\\migrations\\__init__.py"
+                },
+                {
+                    "blank": 15,
+                    "code": 30,
+                    "comment": 1,
+                    "filename": "mysite\\activities\\models.py"
+                },
+                {
+                    "blank": 35,
+                    "code": 93,
+                    "comment": 8,
+                    "filename": "mysite\\activities\\tests.py"
+                },
+                {
+                    "blank": 4,
+                    "code": 10,
+                    "comment": 0,
+                    "filename": "mysite\\activities\\urls.py"
+                },
+                {
+                    "blank": 23,
+                    "code": 39,
+                    "comment": 8,
+                    "filename": "mysite\\activities\\views.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "mysite\\chats\\__init__.py"
+                },
+                {
+                    "blank": 4,
+                    "code": 3,
+                    "comment": 1,
+                    "filename": "mysite\\chats\\admin.py"
+                },
+                {
+                    "blank": 2,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "mysite\\chats\\apps.py"
+                },
+                {
+                    "blank": 20,
+                    "code": 52,
+                    "comment": 3,
+                    "filename": "mysite\\chats\\consumers.py"
+                },
+                {
+                    "blank": 6,
+                    "code": 30,
+                    "comment": 1,
+                    "filename": "mysite\\chats\\migrations\\0001_initial.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 20,
+                    "comment": 1,
+                    "filename": "mysite\\chats\\migrations\\0002_auto_20200725_1442.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "mysite\\chats\\migrations\\__init__.py"
+                },
+                {
+                    "blank": 11,
+                    "code": 53,
+                    "comment": 2,
+                    "filename": "mysite\\chats\\models.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "mysite\\chats\\tests.py"
+                },
+                {
+                    "blank": 3,
+                    "code": 5,
+                    "comment": 1,
+                    "filename": "mysite\\chats\\urls.py"
+                },
+                {
+                    "blank": 1,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "mysite\\chats\\views.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "mysite\\comments\\__init__.py"
+                },
+                {
+                    "blank": 1,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "mysite\\comments\\admin.py"
+                },
+                {
+                    "blank": 2,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "mysite\\comments\\apps.py"
+                },
+                {
+                    "blank": 6,
+                    "code": 28,
+                    "comment": 1,
+                    "filename": "mysite\\comments\\migrations\\0001_initial.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 13,
+                    "comment": 1,
+                    "filename": "mysite\\comments\\migrations\\0002_auto_20200723_1015.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 13,
+                    "comment": 1,
+                    "filename": "mysite\\comments\\migrations\\0003_auto_20200724_1105.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 12,
+                    "comment": 1,
+                    "filename": "mysite\\comments\\migrations\\0004_auto_20200730_1302.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 12,
+                    "comment": 1,
+                    "filename": "mysite\\comments\\migrations\\0005_auto_20200820_1725.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 12,
+                    "comment": 1,
+                    "filename": "mysite\\comments\\migrations\\0006_auto_20200820_1729.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "mysite\\comments\\migrations\\__init__.py"
+                },
+                {
+                    "blank": 16,
+                    "code": 37,
+                    "comment": 4,
+                    "filename": "mysite\\comments\\models.py"
+                },
+                {
+                    "blank": 19,
+                    "code": 41,
+                    "comment": 3,
+                    "filename": "mysite\\comments\\serializers.py"
+                },
+                {
+                    "blank": 1,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "mysite\\comments\\tests.py"
+                },
+                {
+                    "blank": 4,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "mysite\\comments\\urls.py"
+                },
+                {
+                    "blank": 45,
+                    "code": 86,
+                    "comment": 4,
+                    "filename": "mysite\\comments\\views.py"
+                },
+                {
+                    "blank": 8,
+                    "code": 12,
+                    "comment": 1,
+                    "filename": "mysite\\manage.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "mysite\\mysite\\__init__.py"
+                },
+                {
+                    "filename": "mysite\\mysite\\__pycache__\\__init__.cpython-37.pyc",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "filename": "mysite\\mysite\\__pycache__\\settings.cpython-37.pyc",
+                    "isbinaryfile": true,
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0
+                },
+                {
+                    "blank": 5,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "mysite\\mysite\\asgi.py"
+                },
+                {
+                    "blank": 3,
+                    "code": 5,
+                    "comment": 0,
+                    "filename": "mysite\\mysite\\drf_defaults.py"
+                },
+                {
+                    "blank": 15,
+                    "code": 42,
+                    "comment": 22,
+                    "filename": "mysite\\mysite\\jwt_token_auth_middleware.py"
+                },
+                {
+                    "blank": 6,
+                    "code": 15,
+                    "comment": 1,
+                    "filename": "mysite\\mysite\\routing.py"
+                },
+                {
+                    "blank": 59,
+                    "code": 119,
+                    "comment": 15,
+                    "filename": "mysite\\mysite\\settings.py"
+                },
+                {
+                    "blank": 7,
+                    "code": 16,
+                    "comment": 0,
+                    "filename": "mysite\\mysite\\urls.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 4,
+                    "comment": 0,
+                    "filename": "mysite\\mysite\\wsgi.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "mysite\\netizen\\__init__.py"
+                },
+                {
+                    "blank": 1,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "mysite\\netizen\\admin.py"
+                },
+                {
+                    "blank": 2,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "mysite\\netizen\\apps.py"
+                },
+                {
+                    "blank": 6,
+                    "code": 40,
+                    "comment": 1,
+                    "filename": "mysite\\netizen\\migrations\\0001_initial.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 19,
+                    "comment": 1,
+                    "filename": "mysite\\netizen\\migrations\\0002_auto_20200720_1119.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 12,
+                    "comment": 1,
+                    "filename": "mysite\\netizen\\migrations\\0003_auto_20200720_1125.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 12,
+                    "comment": 1,
+                    "filename": "mysite\\netizen\\migrations\\0004_auto_20200720_1127.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 27,
+                    "comment": 1,
+                    "filename": "mysite\\netizen\\migrations\\0005_auto_20200720_1131.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 13,
+                    "comment": 1,
+                    "filename": "mysite\\netizen\\migrations\\0006_auto_20200721_1527.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 13,
+                    "comment": 1,
+                    "filename": "mysite\\netizen\\migrations\\0007_auto_20200721_1535.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 27,
+                    "comment": 1,
+                    "filename": "mysite\\netizen\\migrations\\0008_auto_20200723_1548.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 27,
+                    "comment": 1,
+                    "filename": "mysite\\netizen\\migrations\\0009_auto_20200831_1134.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 32,
+                    "comment": 1,
+                    "filename": "mysite\\netizen\\migrations\\0010_auto_20200831_1228.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 12,
+                    "comment": 1,
+                    "filename": "mysite\\netizen\\migrations\\0011_auto_20200831_1253.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 12,
+                    "comment": 1,
+                    "filename": "mysite\\netizen\\migrations\\0012_auto_20200912_1557.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 12,
+                    "comment": 1,
+                    "filename": "mysite\\netizen\\migrations\\0013_auto_20200916_1455.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "mysite\\netizen\\migrations\\__init__.py"
+                },
+                {
+                    "blank": 48,
+                    "code": 131,
+                    "comment": 13,
+                    "filename": "mysite\\netizen\\models.py"
+                },
+                {
+                    "blank": 63,
+                    "code": 156,
+                    "comment": 0,
+                    "filename": "mysite\\netizen\\serializers.py"
+                },
+                {
+                    "blank": 204,
+                    "code": 469,
+                    "comment": 30,
+                    "filename": "mysite\\netizen\\tests.py"
+                },
+                {
+                    "blank": 3,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "mysite\\netizen\\urls.py"
+                },
+                {
+                    "blank": 60,
+                    "code": 159,
+                    "comment": 5,
+                    "filename": "mysite\\netizen\\views.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "mysite\\relationships\\__init__.py"
+                },
+                {
+                    "blank": 1,
+                    "code": 1,
+                    "comment": 1,
+                    "filename": "mysite\\relationships\\admin.py"
+                },
+                {
+                    "blank": 2,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "mysite\\relationships\\apps.py"
+                },
+                {
+                    "blank": 15,
+                    "code": 35,
+                    "comment": 0,
+                    "filename": "mysite\\relationships\\helpers.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "mysite\\relationships\\managers.py"
+                },
+                {
+                    "blank": 6,
+                    "code": 23,
+                    "comment": 1,
+                    "filename": "mysite\\relationships\\migrations\\0001_initial.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 23,
+                    "comment": 1,
+                    "filename": "mysite\\relationships\\migrations\\0002_auto_20200828_1155.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 25,
+                    "comment": 1,
+                    "filename": "mysite\\relationships\\migrations\\0003_block.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "mysite\\relationships\\migrations\\__init__.py"
+                },
+                {
+                    "blank": 31,
+                    "code": 68,
+                    "comment": 3,
+                    "filename": "mysite\\relationships\\models.py"
+                },
+                {
+                    "blank": 4,
+                    "code": 22,
+                    "comment": 0,
+                    "filename": "mysite\\relationships\\serializers.py"
+                },
+                {
+                    "blank": 29,
+                    "code": 73,
+                    "comment": 4,
+                    "filename": "mysite\\relationships\\tests.py"
+                },
+                {
+                    "blank": 9,
+                    "code": 13,
+                    "comment": 0,
+                    "filename": "mysite\\relationships\\urls.py"
+                },
+                {
+                    "blank": 12,
+                    "code": 33,
+                    "comment": 3,
+                    "filename": "mysite\\relationships\\views.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "mysite\\reports\\__init__.py"
+                },
+                {
+                    "blank": 31,
+                    "code": 47,
+                    "comment": 4,
+                    "filename": "mysite\\reports\\admin.py"
+                },
+                {
+                    "blank": 2,
+                    "code": 3,
+                    "comment": 0,
+                    "filename": "mysite\\reports\\apps.py"
+                },
+                {
+                    "blank": 6,
+                    "code": 22,
+                    "comment": 1,
+                    "filename": "mysite\\reports\\migrations\\0001_initial.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 39,
+                    "comment": 1,
+                    "filename": "mysite\\reports\\migrations\\0002_auto_20200724_1017.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 25,
+                    "comment": 1,
+                    "filename": "mysite\\reports\\migrations\\0003_auto_20200724_1020.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 11,
+                    "comment": 1,
+                    "filename": "mysite\\reports\\migrations\\0004_remove_userreport_report.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 11,
+                    "comment": 1,
+                    "filename": "mysite\\reports\\migrations\\0005_remove_contentreport_report.py"
+                },
+                {
+                    "blank": 0,
+                    "code": 0,
+                    "comment": 0,
+                    "filename": "mysite\\reports\\migrations\\__init__.py"
+                },
+                {
+                    "blank": 25,
+                    "code": 19,
+                    "comment": 0,
+                    "filename": "mysite\\reports\\models.py"
+                },
+                {
+                    "blank": 35,
+                    "code": 73,
+                    "comment": 0,
+                    "filename": "mysite\\reports\\tests.py"
+                },
+                {
+                    "blank": 5,
+                    "code": 7,
+                    "comment": 0,
+                    "filename": "mysite\\reports\\urls.py"
+                },
+                {
+                    "blank": 12,
+                    "code": 47,
+                    "comment": 0,
+                    "filename": "mysite\\reports\\views.py"
+                },
+                {
+                    "blank": 3,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "Pipfile"
+                },
+                {
+                    "blank": 4,
+                    "code": 46,
+                    "comment": 0,
+                    "filename": "Pipfile.lock"
+                },
+                {
+                    "blank": 2,
+                    "code": 15,
+                    "comment": 0,
+                    "filename": "README.md"
+                },
+                {
+                    "blank": 0,
+                    "code": 9,
+                    "comment": 0,
+                    "filename": "requirements.txt"
+                }
+            ]
+        }
+    ]
+}
