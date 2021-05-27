@@ -146,6 +146,7 @@ class MyProfileView(APIView):
 
 	def patch(self, request, *args, **kwargs):
 		current_user = User.objects.get(id=request.user.id)
+	
 		serializer = UserUpdateSerializer(current_user,data=request.data,partial=True)
 
 		if serializer.is_valid():

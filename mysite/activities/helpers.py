@@ -3,7 +3,7 @@ from .models import Mention,Activity
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import get_user_model
 User = get_user_model()
-
+from django.core.exceptions import ObjectDoesNotExist
 import re
 from netizen import models as netizen_models
 from comments import models as comment_models
@@ -50,19 +50,25 @@ def is_bookmarked(content_type_model,object_id,user):
 
     return(is_bookmarked)
 
-def mention(content_type_model,object_id,current_user,text):
-   
-    content_type = ContentType.objects.get(model=content_type_model)
-
+def checkForUsernames(text):
     usernames =[username[1:] for username in re.findall("@\w+",text)]
+    
+    if len(usernames)>0:
+        return usernames
+    else:
+        return None
 
-    for username in usernames:
-        try:
-            user = User.objects.get(username=username)
-            
-            Mention.objects.create(content_type=content_type,object_id=object_id,user=current_user,user_tagged=user)
-        except User.DoesNotExist:
-            pass
+
+def mention(content_type_model,object_id,current_user,text):
+    usernames = checkForUsernames(text)
+    if usernames is not  None:
+        content_type = ContentType.objects.get(model=content_type_model)
+        for username in usernames:
+            try:
+                user = User.objects.get(username=username)
+                Mention.objects.create(content_type=content_type,object_id=object_id,user=current_user,user_tagged=user)
+            except User.DoesNotExist:
+                pass
 
 
 def change_username_in_text(new_username,previous_username,text):
@@ -73,25 +79,21 @@ def update(previous_username,new_username):
     tagged_user = User.objects.get(username=previous_username)
 
     mentions = Mention.objects.filter(user_tagged=tagged_user,)
-    # content_type_models = mentions.content_type.model
-
     for mention in mentions:
-        
         content_type = ContentType.objects.get(model=mention.content_type.model)
-        # print(content_type)
         obj = content_type.get_object_for_this_type(id=mention.object_id)
-        if content_type == ContentType.objects.get_for_model(netizen_models.Meme):
+        print("update ",content_type.name)
+        if content_type.name == "meme":
             new_text = change_username_in_text(new_username=new_username,previous_username=previous_username,text=obj.description)
             obj.description = new_text
-            obj.save("description")
-        elif content_type == ContentType.objects.get_for_model(netizen_models.Template):
+            obj.save()
+        elif content_type.name == "template":
             new_text = change_username_in_text(new_username=new_username,previous_username=previous_username,text=obj.description)
             obj.description = new_text
-            obj.save("description")
-        elif content_type == ContentType.objects.get_for_model(comment_models.Comment):
+            obj.save()
+        elif content_type.name == "comment" :
             new_text = change_username_in_text(new_username=new_username,previous_username=previous_username,text=obj.body)
             obj.body =new_text
-
             obj.save()
         else:
             return False

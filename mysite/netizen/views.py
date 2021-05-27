@@ -8,14 +8,14 @@ from rest_framework import mixins
 from rest_framework import generics
 from rest_framework.pagination import PageNumberPagination
 from mysite.drf_defaults import DefaultResultsSetPagination
-
+from django.contrib.contenttypes.models import ContentType
 from .models import Template,Meme
 from django.contrib.auth import get_user_model
 User = get_user_model()
 from rest_framework.permissions import AllowAny,IsAuthenticated
 from django.shortcuts import get_object_or_404
 from django.http import Http404
-
+from activities.helpers import mention
 from .serializers import( TemplateListSerializer,
                             TemplateUploadSerializer,
                             MemeListSerializer,
@@ -85,7 +85,8 @@ class TemplateUploadView(APIView):
                 if stat == status.HTTP_400_BAD_REQUEST:
                     template.delete()
                     return Response(res, status=status.HTTP_400_BAD_REQUEST)
-
+                    
+            mention(ContentType.objects.get_for_model(Template).model,data['id'],user,data['description'])
             return Response(data, status=status.HTTP_201_CREATED)
         else:
             return Response(file_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -203,6 +204,7 @@ class MemeUploadView(APIView):
                     meme.delete()
                     return Response(res, status=status.HTTP_400_BAD_REQUEST)
 
+            mention(ContentType.objects.get_for_model(Meme).model,data['id'],user,data['description'])
             return Response(data, status=status.HTTP_201_CREATED)
         else:
 

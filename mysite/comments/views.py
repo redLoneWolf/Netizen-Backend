@@ -57,19 +57,24 @@ class CommentCreateView(APIView):
     permission_classes = [IsAuthenticated]
     def post(self, request, *args, **kwargs):
         
+        
+
+        if not ('content_type' in  request.data and 'object_id' in request.data) :
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        
         content_type_model = request.data['content_type']
 
         content_type = ContentType.objects.get(model=content_type_model)
         object_id = request.data['object_id']
+
         post = content_type.get_object_for_this_type(id=object_id)
         data={}
-        # data['post_id']= post.id
+
         user = get_object_or_404(User,id=request.user.id)
-        # print(content_type,object_id,user)
-        # mention(ContentType.objects.get_for_model(Comment).model,post.id,user,request.data['body'])
+
 
         serializer = CommentCreateSerializer(data=request.data)
-        # print(serializer.is_valid())
+     
         if serializer.is_valid():
             
             parent_obj = None
@@ -92,8 +97,8 @@ class CommentCreateView(APIView):
             
             
             serializer.save(user=user,content_type = content_type,object_id = post.id)
-            
-            mention(ContentType.objects.get_for_model(Comment).model,serializer.data['id'],user,serializer.data['body'])
+         
+            mention('ContentType.objects.get_for_model(Comment).model',serializer.data['id'],user,serializer.data['body'])
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
