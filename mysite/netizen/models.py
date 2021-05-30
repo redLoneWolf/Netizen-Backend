@@ -14,6 +14,10 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 from activities.helpers import get_total_favourites,get_total_likes,is_liked
 from comments.models import Comment
+
+from django_extensions.db.fields  import ShortUUIDField
+
+
 THUMB_SIZE = 304, 255
 from django.contrib.contenttypes.fields import GenericForeignKey
 
@@ -35,14 +39,14 @@ def get_template_thumbnail_path(instance,filename):
         return "netizen/templates/thumbs/{id}_thumb.{ext}".format(id=id,ext=ext)
 
 class ImageModel(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = ShortUUIDField(primary_key=True, auto=True, editable=False)
    
     image = models.ImageField(upload_to=get_template_images_path, blank=False,null=False)
     thumbnail = models.ImageField(
         upload_to=get_template_thumbnail_path, blank=False, default='hi')
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.UUIDField(editable=False) 
+    object_id = ShortUUIDField(editable=False,auto=False) 
     content_object = GenericForeignKey()
 
 
@@ -97,7 +101,7 @@ class ImageModel(models.Model):
 
 
 class Template(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = ShortUUIDField(primary_key=True, auto=True, editable=False)
     user = models.ForeignKey(User, related_name='templates', on_delete=models.CASCADE)
     description = models.TextField(max_length=250,blank=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -136,7 +140,7 @@ class Template(models.Model):
 
 
 class Meme(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = ShortUUIDField(primary_key=True, auto=True, editable=False)
     user = models.ForeignKey(User, related_name='memes',
                              on_delete=models.CASCADE)
     template = models.ForeignKey(

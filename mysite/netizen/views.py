@@ -42,11 +42,12 @@ class TemplatesList(generics.ListAPIView):
             Optionally restricts the returned qs to a given user,
             by filtering against a `username` query parameter in the URL.
             """
-            queryset = Meme.objects.all()
+            queryset = Template.objects.all()
+            print("tempssssssssssss")
             username = self.request.query_params.get('username')
             if username is not None:
                 queryset = queryset.filter(user__username=username)
-        
+            
             return queryset
 
 
@@ -148,7 +149,8 @@ class MemesList(generics.ListAPIView):
         username = self.request.query_params.get('username')
         if username is not None:
             queryset = queryset.filter(user__username=username)
-    
+        
+        print(queryset)
         return queryset
 
 

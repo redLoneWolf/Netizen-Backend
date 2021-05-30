@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'channels',
     'widget_tweaks',
-    
+    'django_extensions',
     'accounts',
     'activities',
     'netizen',

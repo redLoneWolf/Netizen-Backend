@@ -9,6 +9,7 @@ User = get_user_model()
 from .models import Template,Meme
 from activities.models import Activity
 from comments.models import Comment
+from utils.custom import reverse_with_query
 from PIL import Image
 import tempfile
 

@@ -2,20 +2,15 @@ from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth import get_user_model
 User = get_user_model()
+from django_extensions.db.fields  import ShortUUIDField
 
 from django.contrib.contenttypes.fields import GenericForeignKey
 
 class ContentReport(models.Model):
-
-
-
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.UUIDField() 
+    object_id = ShortUUIDField(editable=False,auto=False) 
 
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True,)
-
-    
-
     content_object = GenericForeignKey()
 
     subject = models.TextField(blank=True)

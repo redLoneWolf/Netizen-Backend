@@ -55,9 +55,8 @@ class CommentList(generics.ListAPIView):
 
 class CommentCreateView(APIView):
     permission_classes = [IsAuthenticated]
+    
     def post(self, request, *args, **kwargs):
-        
-        
 
         if not ('content_type' in  request.data and 'object_id' in request.data) :
             return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -76,9 +75,7 @@ class CommentCreateView(APIView):
         serializer = CommentCreateSerializer(data=request.data)
      
         if serializer.is_valid():
-            
             parent_obj = None
-            
             try:
                 
                 parent_id = request.data['parent_id']

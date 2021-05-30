@@ -4,6 +4,8 @@ User = get_user_model()
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 import uuid
+from django_extensions.db.fields  import ShortUUIDField
+
 class Activity(models.Model):
     BOOKMARK = 'B'
     LIKE = 'L'
@@ -22,13 +24,13 @@ class Activity(models.Model):
 
     # Below the mandatory fields for generic relation
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id =  models.UUIDField() 
+    object_id =  ShortUUIDField(editable=False,auto=False) 
     content_object = GenericForeignKey()
 
 class Mention(models.Model):
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    id = ShortUUIDField(primary_key=True, editable=False,auto=True)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.UUIDField(editable=False) 
+    object_id = ShortUUIDField(editable=False,auto=False) 
 
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     content_object = GenericForeignKey()
