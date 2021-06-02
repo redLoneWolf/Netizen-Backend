@@ -6,12 +6,13 @@ from rest_framework_simplejwt.tokens import RefreshToken
 
 from django.contrib.auth import get_user_model
 User = get_user_model()
-
+from django.conf import settings
+from django.test import override_settings
 from activities.models import Activity
 from django.contrib.contenttypes.models import ContentType
 from PIL import Image
 import tempfile
-
+import shutil
 from netizen.models import Meme
 
 def get_tokens_for_user(user):
@@ -22,7 +23,7 @@ def get_tokens_for_user(user):
         'access': str(refresh.access_token),
     }
 
-
+@override_settings(MEDIA_ROOT=(settings.TEST_MEDIA_ROOT))
 class ActivityTests(APITestCase):
         like_url= reverse('activities:like')
         bookmark_url = reverse('activities:bookmark')
@@ -126,3 +127,12 @@ class ActivityTests(APITestCase):
         
                 self.assertFalse(Activity.objects.filter(content_type=self.meme.get_content_type,object_id=self.meme.id,activity_type=Activity.BOOKMARK,user=self.user).exists())
                 self.assertEqual(Activity.objects.filter(content_type=self.meme.get_content_type,object_id=self.meme.id,activity_type=Activity.BOOKMARK).count(),0)
+
+
+
+def tearDownModule():
+    print ("\n Activities: Deleting temporary files...\n")
+    try:
+        shutil.rmtree(settings.TEST_MEDIA_ROOT)
+    except OSError:
+        pass

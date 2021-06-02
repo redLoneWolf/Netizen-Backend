@@ -5,8 +5,8 @@ User = get_user_model()
 
 from django.contrib.contenttypes.fields import GenericForeignKey
 import uuid
-from django_extensions.db.fields  import ShortUUIDField
 
+from utils.fields import RandomB64Field
 class CommentManager(models.Manager):
     def all(self):
         qs = super(CommentManager, self).filter(parent=None)
@@ -21,9 +21,9 @@ class CommentManager(models.Manager):
 
 
 class Comment(models.Model):
-    id = ShortUUIDField(primary_key=True,  auto=True,unique=True)
+    id = RandomB64Field(primary_key=True,  auto=True,unique=True)
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = ShortUUIDField(editable=False,auto=False) 
+    object_id = RandomB64Field(editable=False,auto=False) 
 
     user = models.ForeignKey(User,on_delete=models.CASCADE,null=True)
     content_object = GenericForeignKey()

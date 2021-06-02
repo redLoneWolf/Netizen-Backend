@@ -24,8 +24,8 @@ from .serializers import( TemplateListSerializer,
                             TemplatePatchSerializer,
                             MemeDetailSerializer,
                             MemePatchSerializer,
-                            # UserMemeSerializer,
-                            # UserTemplateSerializer,
+                            UserMemeSerializer,
+                            UserTemplateSerializer,
                             ImageSerializer
 
                             )
@@ -34,16 +34,25 @@ class TemplatesList(generics.ListAPIView):
    
 
     # queryset = Template.objects.all()
-    serializer_class = TemplateListSerializer
+    # serializer_class = TemplateListSerializer
     permission_classes = [IsAuthenticated]
-    
+
+    def get_serializer_class(self):
+
+        username = self.request.query_params.get('username')
+
+        if username is not None:
+            self.serializer_class = UserTemplateSerializer
+        else:
+            self.serializer_class = TemplateListSerializer
+
     def get_queryset(self):
             """
             Optionally restricts the returned qs to a given user,
             by filtering against a `username` query parameter in the URL.
             """
             queryset = Template.objects.all()
-            print("tempssssssssssss")
+         
             username = self.request.query_params.get('username')
             if username is not None:
                 queryset = queryset.filter(user__username=username)
@@ -70,6 +79,7 @@ class TemplateUploadView(APIView):
         data = {}
     
         user = get_object_or_404(User, id=request.user.id)
+        
         file_serializer = TemplateUploadSerializer(data= request.data)
         
         if file_serializer.is_valid():
@@ -137,18 +147,32 @@ class MemesList(generics.ListAPIView):
   
 
     # queryset = Meme.objects.all()
-    serializer_class = MemeListSerializer
+    # serializer_class = MemeListSerializer
     permission_classes = [IsAuthenticated]
+
+    def get_serializer_class(self):
+
+        username = self.request.query_params.get('username')
+
+        if username is not None:
+            self.serializer_class = UserMemeSerializer
+        else:
+            self.serializer_class = MemeListSerializer
+
 
     def get_queryset(self):
         """
         Optionally restricts the returned purchases to a given user,
         by filtering against a `username` query parameter in the URL.
         """
-        queryset = Meme.objects.all()
+        
         username = self.request.query_params.get('username')
         if username is not None:
-            queryset = queryset.filter(user__username=username)
+            queryset = Meme.objects.filter(user__username=username)
+        else:
+            queryset = Meme.objects.all()
+            
+
         
         print(queryset)
         return queryset

@@ -2,10 +2,10 @@ from django.db import models
 
 import uuid
 from django.db import models
-import os.path
+import os
 from PIL import Image as img
 from io import BytesIO
-
+from django.conf import settings
 from django.urls import reverse
 from django.core.files.base import ContentFile
 from django.contrib.contenttypes.fields import GenericRelation
@@ -15,8 +15,8 @@ User = get_user_model()
 from activities.helpers import get_total_favourites,get_total_likes,is_liked
 from comments.models import Comment
 
-from django_extensions.db.fields  import ShortUUIDField
 
+from utils.fields import RandomB64Field
 
 THUMB_SIZE = 304, 255
 from django.contrib.contenttypes.fields import GenericForeignKey
@@ -25,28 +25,38 @@ def get_template_images_path(instance,filename):
     id = instance.id
     ext = filename.split(".")[-1]
     if instance.content_type == ContentType.objects.get_for_model(model=Meme):
-        return "netizen/memes/{id}.{ext}".format(id=id,ext=ext)
+        fileStr = "{id}.{ext}".format(id=id,ext=ext)
+        p = os.path.join(settings.MEDIA_ROOT,'netizen','memes',fileStr)
+        return p
     elif instance.content_type == ContentType.objects.get_for_model(model=Template):
-        return "netizen/templates/{id}.{ext}".format(id=id,ext=ext)
+        fileStr = "{id}.{ext}".format(id=id,ext=ext)
+        p = os.path.join(settings.MEDIA_ROOT,'netizen','templates',fileStr)
+        return p
 
 def get_template_thumbnail_path(instance,filename):
     id = instance.id
     ext = filename.split(".")[-1]
-    # print(ext)
     if instance.content_type == ContentType.objects.get_for_model(model=Meme):
-        return "netizen/memes/thumbs/{id}_thumb.{ext}".format(id=id,ext=ext)
+        fileStr= "{id}_thumb.{ext}".format(id=id,ext=ext)
+
+        p = os.path.join(settings.MEDIA_ROOT,'netizen','memes','thumbs',fileStr)
+        return p
+       
     elif instance.content_type == ContentType.objects.get_for_model(model=Template):
-        return "netizen/templates/thumbs/{id}_thumb.{ext}".format(id=id,ext=ext)
+        fileStr= "{id}_thumb.{ext}".format(id=id,ext=ext)
+        p = os.path.join(settings.MEDIA_ROOT,'netizen','templates','thumbs',fileStr)
+       
+        return p
 
 class ImageModel(models.Model):
-    id = ShortUUIDField(primary_key=True, auto=True, editable=False)
+    id = RandomB64Field(primary_key=True, auto=True, editable=False)
    
     image = models.ImageField(upload_to=get_template_images_path, blank=False,null=False)
     thumbnail = models.ImageField(
         upload_to=get_template_thumbnail_path, blank=False, default='hi')
 
     content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = ShortUUIDField(editable=False,auto=False) 
+    object_id = RandomB64Field(editable=False,auto=False) 
     content_object = GenericForeignKey()
 
 
@@ -101,7 +111,7 @@ class ImageModel(models.Model):
 
 
 class Template(models.Model):
-    id = ShortUUIDField(primary_key=True, auto=True, editable=False)
+    id = RandomB64Field(primary_key=True, auto=True, editable=False)
     user = models.ForeignKey(User, related_name='templates', on_delete=models.CASCADE)
     description = models.TextField(max_length=250,blank=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -140,7 +150,7 @@ class Template(models.Model):
 
 
 class Meme(models.Model):
-    id = ShortUUIDField(primary_key=True, auto=True, editable=False)
+    id = RandomB64Field(primary_key=True, auto=True, editable=False)
     user = models.ForeignKey(User, related_name='memes',
                              on_delete=models.CASCADE)
     template = models.ForeignKey(

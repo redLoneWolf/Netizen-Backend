@@ -7,7 +7,7 @@ from rest_framework import status
 from django.contrib.contenttypes.models import ContentType
 from rest_framework import generics
 from django.contrib.auth import get_user_model
-
+from django.core.exceptions import ObjectDoesNotExist
 User = get_user_model()
 from django.shortcuts import get_object_or_404
 from .models import Comment
@@ -25,7 +25,7 @@ class CommentList(generics.ListAPIView):
     
 
     def get_queryset(self):
-        print(self.kwargs)
+        # print(self.kwargs)
         content_type_model = self.request.query_params.get('content_type', None)
         
         content_type = get_object_or_404(ContentType,model=content_type_model)
@@ -38,7 +38,7 @@ class CommentList(generics.ListAPIView):
 
         try:
             post = content_type.get_object_for_this_type(id=object_id)
-        except content_type.model_class().DoesNotExist:
+        except ObjectDoesNotExist:
             raise Http404
 
         if parent_id:
@@ -62,12 +62,18 @@ class CommentCreateView(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
         
         content_type_model = request.data['content_type']
-
-        content_type = ContentType.objects.get(model=content_type_model)
         object_id = request.data['object_id']
 
-        post = content_type.get_object_for_this_type(id=object_id)
-        data={}
+        try:
+            content_type = ContentType.objects.get(model=content_type_model)
+        except ContentType.DoesNotExist:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            post = content_type.get_object_for_this_type(id=object_id)
+        except ObjectDoesNotExist:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
 
         user = get_object_or_404(User,id=request.user.id)
 
@@ -77,7 +83,6 @@ class CommentCreateView(APIView):
         if serializer.is_valid():
             parent_obj = None
             try:
-                
                 parent_id = request.data['parent_id']
             except:
                 parent_id = None

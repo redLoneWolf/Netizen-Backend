@@ -12,6 +12,10 @@ from comments.models import Comment
 from utils.custom import reverse_with_query
 from PIL import Image
 import tempfile
+from django.conf import settings
+from django.test import override_settings
+import shutil
+
 
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
@@ -20,7 +24,7 @@ def get_tokens_for_user(user):
         'refresh': str(refresh),
         'access': str(refresh.access_token),
     }
-
+@override_settings(MEDIA_ROOT=(settings.TEST_MEDIA_ROOT))
 class TemplateUploadTests(APITestCase):
     template_create_url = reverse('netizen:template_upload')
 
@@ -73,7 +77,7 @@ class TemplateUploadTests(APITestCase):
         response = self.client.post(self.template_create_url, data, format='multipart')
 
         self.assertEqual(response.status_code,status.HTTP_400_BAD_REQUEST)
-
+@override_settings(MEDIA_ROOT=(settings.TEST_MEDIA_ROOT))
 class TemplateViewTests(APITestCase):
     
     
@@ -168,6 +172,8 @@ class TemplateViewTests(APITestCase):
         
         self.assertEqual(response.status_code,status.HTTP_403_FORBIDDEN)
 
+
+@override_settings(MEDIA_ROOT=(settings.TEST_MEDIA_ROOT))
 class MemeUploadTests(APITestCase):
     meme_create_url = reverse('netizen:meme_upload')
 
@@ -220,7 +226,7 @@ class MemeUploadTests(APITestCase):
         response = self.client.post(self.meme_create_url, data, format='multipart')
 
         self.assertEqual(response.status_code,status.HTTP_400_BAD_REQUEST)
-
+@override_settings(MEDIA_ROOT=(settings.TEST_MEDIA_ROOT))
 class MemeViewTests(APITestCase):
     
     
@@ -320,7 +326,7 @@ class MemeViewTests(APITestCase):
 
 
 
-
+@override_settings(MEDIA_ROOT=(settings.TEST_MEDIA_ROOT))
 class ActivityTests(APITestCase):
     like_url= reverse('activities:like')
     bookmark_url = reverse('activities:bookmark')
@@ -502,7 +508,7 @@ class ActivityTests(APITestCase):
         self.assertFalse(Activity.objects.filter(content_type=self.meme.get_content_type,object_id=self.meme.id,activity_type=Activity.BOOKMARK,user=self.user).exists())
         self.assertEqual(Activity.objects.filter(content_type=self.meme.get_content_type,object_id=self.meme.id,activity_type=Activity.BOOKMARK).count(),0)
 
-
+@override_settings(MEDIA_ROOT=(settings.TEST_MEDIA_ROOT))
 class CommentTests(APITestCase):
             
         # self.comment_update_url= reverse('comments:comment_update')
@@ -678,4 +684,9 @@ class CommentTests(APITestCase):
         
 
 
-    
+def tearDownModule():
+    print ("\n Netizen: Deleting temporary files...\n")
+    try:
+        shutil.rmtree(settings.TEST_MEDIA_ROOT)
+    except OSError:
+        pass

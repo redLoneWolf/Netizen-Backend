@@ -197,6 +197,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = '/media/'
 
+TEST_BASE  = 'test-contents'
+TEST_MEDIA_ROOT = os.path.join(BASE_DIR,TEST_BASE,'test-media')
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = ''
 

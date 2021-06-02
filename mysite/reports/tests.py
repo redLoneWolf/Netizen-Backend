@@ -11,9 +11,10 @@ from reports.models import ContentReport,UserReport
 from django.contrib.contenttypes.models import ContentType
 from PIL import Image
 import tempfile
-
+from django.conf import settings
+from django.test import override_settings
 from netizen.models import Meme
-
+import shutil
 def get_tokens_for_user(user):
     refresh = RefreshToken.for_user(user)
 
@@ -22,7 +23,7 @@ def get_tokens_for_user(user):
         'access': str(refresh.access_token),
     }
 
-
+@override_settings(MEDIA_ROOT=(settings.TEST_MEDIA_ROOT))
 class ContentReportTests(APITestCase):
         report_content_url= reverse('reports:report_content')
       
@@ -50,7 +51,7 @@ class ContentReportTests(APITestCase):
                 response = self.client.post(meme_create_url, data, format='multipart')
         
                 self.meme_id = response.data['id']
-                self.meme =Meme.objects.get(id=self.meme_id)
+                self.meme = Meme.objects.get(id=self.meme_id)
                 self.content_type = ContentType.objects.get(model=self.meme.get_content_type_model)
         
         def test_report_create(self):
@@ -72,7 +73,7 @@ class ContentReportTests(APITestCase):
             self.assertEqual(response.status_code,status.HTTP_401_UNAUTHORIZED)  
 
 
-
+@override_settings(MEDIA_ROOT=(settings.TEST_MEDIA_ROOT))
 class UserReportTests(APITestCase):
         report_user_url = reverse('reports:report_user')
         
@@ -106,3 +107,12 @@ class UserReportTests(APITestCase):
             self.client.credentials()
             response = self.client.post(self.report_user_url, data, format='json')   
             self.assertEqual(response.status_code,status.HTTP_401_UNAUTHORIZED)  
+
+
+
+def tearDownModule():
+    print ("\n Reports: Deleting temporary files...\n")
+    try:
+        shutil.rmtree(settings.TEST_MEDIA_ROOT)
+    except OSError:
+        pass
